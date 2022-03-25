@@ -75,7 +75,8 @@ plot=ggplot() + geom_polygon(data = Tennessee, aes(x=long, y = lat),color="gray2
         plot.caption = element_text(size=15,hjust=.95)
   ) 
 
-plot+geom_point(data = stations_tn%>% filter(FUEL_TYPE_CODE=="ELEC"), aes(x=LONGDD,y=LATDD,color=FUEL_TYPE_CODE), size=.5,alpha=.75,shape=20,show.legend = FALSE) 
+plot+geom_point(data = stations_tn%>% filter(FUEL_TYPE_CODE=="ELEC"), 
+                aes(x=LONGDD,y=LATDD,color=FUEL_TYPE_CODE), size=.5,alpha=.75,shape=20,show.legend = FALSE) 
 
 
 ggsave("alternative_fuel_TN_final.png",last_plot(), width=7,height = 2.8,dpi=320)
