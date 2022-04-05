@@ -1,9 +1,9 @@
-setwd("~/R/Infographics/babynames")
+setwd("~/R/TidyTuesday/2022/2022-03-22_babynames")
 
 library(tidyverse)
 library(sysfonts)
 library(showtext)
-library(ggtext)
+#library(ggtext)
 
 showtext_auto()
 
@@ -13,19 +13,19 @@ sysfonts::font_add_google("Junge","Junge")
 babynames <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-03-22/babynames.csv')
 
 
-male=babynames%>% filter(sex=="M") %>% group_by(year) %>% summarise(max=max(n))
-female=babynames%>% filter(sex=="M") %>% group_by(year) %>% summarise(max=max(n))
-
-for(i in 1:nrow(male)){
-male$first_letter[i] <- babynames %>% filter(year==male$year[i] & n==male$max[i]) %>% select(name) %>% substr(1,1)
-female$first_letter[i] <- babynames %>% filter(year==male$year[i] & n==male$max[i]) %>% select(name) %>% substr(1,1)
-}
+# male=babynames%>% filter(sex=="M") %>% group_by(year) %>% summarise(max=max(n))
+# female=babynames%>% filter(sex=="M") %>% group_by(year) %>% summarise(max=max(n))
+# 
+# for(i in 1:nrow(male)){
+# male$first_letter[i] <- babynames %>% filter(year==male$year[i] & n==male$max[i]) %>% select(name) %>% substr(1,1)
+# female$first_letter[i] <- babynames %>% filter(year==male$year[i] & n==male$max[i]) %>% select(name) %>% substr(1,1)
+# }
 
 
 babynames_let <- babynames %>% mutate(first_letter = substr(name,1,1))
 
-babynames_summary_m <- babynames_let %>% filter(sex=="M") %>% group_by(year, first_letter) %>% summarise(total = sum(n)) #%>% select(year, first_letter,total) 
-babynames_summary_f <- babynames_let %>% filter(sex=="F") %>% group_by(year, first_letter) %>% summarise(total = sum(n)) #%>% select(year, first_letter,total) 
+# babynames_summary_m <- babynames_let %>% filter(sex=="M") %>% group_by(year, first_letter) %>% summarise(total = sum(n)) #%>% select(year, first_letter,total) 
+# babynames_summary_f <- babynames_let %>% filter(sex=="F") %>% group_by(year, first_letter) %>% summarise(total = sum(n)) #%>% select(year, first_letter,total) 
 babynames_summary <- babynames_let %>% group_by(year, first_letter,sex) %>% summarise(total = sum(n)) #%>% select(year, first_letter,total) 
 
 
@@ -34,7 +34,7 @@ babynames_summary %>% mutate(sex = case_when(
   TRUE ~ "Male")) %>% 
   ggplot(aes(year, first_letter, fill= total/1e5)) + 
   geom_tile(size=6) +
-  scale_fill_gradient(low="#E5C454", high="#ffffe0",name="Count (in 10,000's)",
+  scale_fill_gradient(low="#E94F64", high="#ffffe0",name="Count (in 10,000's)",
                       )+
   xlab("Year") + ylab("")+
   facet_grid(.~sex) +
@@ -61,14 +61,6 @@ babynames_summary %>% mutate(sex = case_when(
         strip.background = element_rect(fill="#141414",color="#141414"),
         strip.text = element_text(color="#D5D6DE",size =22))
 
-# babynames_summary_m %>% ggplot(aes(year, first_letter, fill= total/1e5)) + 
-#   geom_tile() +
-#   scale_fill_gradient(low="skyblue", high="blue") 
-# 
-# 
-# babynames_summary_f %>% ggplot(aes(year, first_letter, fill= total/1e5)) + 
-#   geom_tile() +
-#   scale_fill_gradient(low="pink", high="red") 
 
-ggsave("babynames_v11.png",last_plot(), width=4,height = 5,units = "in")
+ggsave("babynames_final.png",last_plot(), width=4,height = 5,units = "in")
 
