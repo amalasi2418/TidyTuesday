@@ -56,7 +56,7 @@ anti_donations %>%
   geom_hline(yintercept = 1,size=1,color="#212121") +
   geom_vline(xintercept = 1,size=1,color="#212121") +
   geom_text(aes(label=label),color="#212121",nudge_y = .075,size = 10,family = "Nova Flat")+
-  scale_size_continuous(breaks = c(1e5,3e5,5e5)) +
+  scale_size_continuous(labels = scales::comma,breaks=c(1e5,3e5,5e5)) +
   scale_x_continuous(breaks = c(.5,1.5),labels = c("FALSE","TRUE")) +
   scale_y_continuous(breaks = c(.5,1.5),labels = c("FALSE","TRUE")) +
   labs(title = "Anti-LGBTQ Corporate Campaign Donations",
