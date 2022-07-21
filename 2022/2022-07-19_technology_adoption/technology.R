@@ -1,4 +1,4 @@
-setwd("~/R/TidyTuesday/2022/2022-07-19_technology_adaptation")
+setwd("~/R/TidyTuesday/2022/2022-07-19_technology_adoption")
 
 library(tidyverse)
 library(showtext)
