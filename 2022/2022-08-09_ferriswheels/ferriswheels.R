@@ -38,7 +38,7 @@ wheels_df %>%
   annotate(geom = "text", x=242, y=-395, label="London Eye", family=text,size=6,color="#414141")+
   annotate(geom = "text", x=655, y=-250, label="Beijing Great Wheel", family=text,size=6,color="#414141")+
   labs(title="Ferris wheels",
-       subtitle = "Chicago wheel, the oldest ferris wheel was opened in 1893. The labelled,\nferris wheels are the tallest ones in Americas, Asia, and Europe. The\nheight and diameter of the ferris wheels are represented by the line\nsegment and dots respectively. The country of the wheels are color coded.",
+       subtitle = "Chicago wheel, the oldest ferris wheel was opened in 1893. The other\nlabelled ferris wheels are the tallest ones in Americas, Asia, and Europe.\nThe height and diameter of the ferris wheels are represented by the line\nsegment and dots, respectively. The country of the wheels are color coded.",
        caption="Data: ferriswheels package by Emil Hvitfeldt | Graphic: Abhinav Malasi")+
   coord_fixed()+
   theme(panel.grid = element_blank(),
