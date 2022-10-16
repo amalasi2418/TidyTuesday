@@ -1,4 +1,4 @@
-setwd("~/Abhinav/tidytuesday/bigfoot")
+setwd("~/R/TidyTuesday/2022/2022-09-13_bigfoot")
 
 library(tidyverse)
 library(sf)
@@ -50,9 +50,9 @@ bigfoot %>% mutate(year=lubridate::year(bigfoot$date)) %>%
   ggplot(aes(year,sightings/1e6)) + geom_col() +
   geom_col(data=temp,aes(year,value),fill="red") +
   geom_text(x=1950,y=4.5,label="Is rising temperatures the reason for\nincreased Bigfoot sightings?",lineheight=.25,size=35, family=text)+
-  geom_richtext(x=1950,y=3,label="The global rise in <span style = 'color:red;'>temperatures</span> and sightings of bigfoot have shown a dramatic increase<br>during the past four decades with a correlation of 0.82.",size=12,lineheight=.45,family=text,label.size = NA)+
+  geom_richtext(x=1950,y=3,label="The global rise in <span style = 'color:red;'>temperatures</span> and sightings (scaled down by 1 million) of bigfoot have shown<br>a dramatic increase during the past four decades with a correlation of 0.82.",size=12,lineheight=.45,family=text,label.size = NA)+
   labs(#title = "Is Global Warming the cause of increased Bigfoot sightings?",
-       caption = "Source: Data.World | Graphic: Abhinav Malasi") +
+       caption = "Source: Data.World, NASA | Graphic: Abhinav Malasi") +
   scale_x_continuous(expand = c(0,0),breaks = seq(1880,2020,by=20)) +
   scale_y_continuous(expand = c(0,0)) +
   theme(plot.background = element_rect(fill=bg,color=bg),
@@ -67,7 +67,7 @@ bigfoot %>% mutate(year=lubridate::year(bigfoot$date)) %>%
         text = element_text(family = text))
 
 
-ggsave("bigfoot.png",last_plot(),width = 10,height = 6,units = "in")
+ggsave("bigfoot1.png",last_plot(),width = 10,height = 6,units = "in")
 
 
 bigfoot_cor <- bigfoot %>% mutate(year=lubridate::year(bigfoot$date)) %>% 
